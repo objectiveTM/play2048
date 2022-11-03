@@ -22,7 +22,7 @@ class move(Enum):
 class customs(Enum):
     ORIGINAL = Custom(
         bg="#BBADA0", 
-        none = "#7FC700", 
+        none = "#F9CF00", 
         font = "#F9F6F2", 
         _0 = "#CCC0B3",
         _2 = "#EEE4DA",
