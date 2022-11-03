@@ -8,7 +8,7 @@ class Game:
     2048 game!
     
     ## example
-    @see - 
+    [@see cmd2048](https://github.com/objectiveTM/play2048/tree/main/examples/cmd2048.py)
     """
     def __init__(self) -> None:
         self.arr = [[0 for i in range(5)] for i in range(5)]
@@ -157,7 +157,7 @@ class Game:
         
         return re
     
-    def encodingImage(self, custom: Enum = customs.ORIGINAL):
+    def encodingImage(self, custom: Custom = customs.ORIGINAL) -> easy_pil.Editor:
         custom = custom.value
         size = 500
         padding = 10
@@ -185,7 +185,7 @@ class Game:
             pos[1] += blockSize
             
         
-        img.show()
+        return img
         
         
     
