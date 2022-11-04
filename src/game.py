@@ -11,7 +11,7 @@ class Game:
     [@see cmd2048](https://github.com/objectiveTM/play2048/tree/main/examples/cmd2048.py)
     """
     def __init__(self, spown = lambda :(4 if random.randint(0, 10) == 0 else 2)) -> None:
-        self.arr = [[0 for i in range(5)] for i in range(5)]
+        self.arr = [[0 for i in range(4)] for i in range(4)]
         self.point = 0
         self.spown = spown
 
@@ -143,7 +143,7 @@ class Game:
         
     def _random(self) -> tuple[int]: 
         # return 0
-        pos = (random.randint(0, 4), random.randint(0, 4))
+        pos = (random.randint(0, 3), random.randint(0, 3))
         if self.arr[pos[0]][pos[1]] != 0:
             return self._random()
         else:
@@ -161,7 +161,7 @@ class Game:
     def encodingImage(self, custom: Custom = customs.ORIGINAL.value) -> easy_pil.Editor:
         size = 500
         padding = 10
-        blockSize = int((size - padding*6)/5)
+        blockSize = int((size - padding*5)/4)
         pos = [0, 0]
         img = easy_pil.Editor(easy_pil.Canvas(color = custom.bg, size = (size, size)))
         for i in self.arr:
@@ -175,11 +175,31 @@ class Game:
                 if j != 0:
                     ln = len(str(j))-1
                     
-                    font = easy_pil.Font.poppins(size = blockSize-int(20*(ln))+(18 if ln == 4 else 0)+(5 if ln == 3 else 0))
+                    fsize = blockSize-10
+                    tsize = 3
+                    
+                    if ln == 1:
+                        fsize = blockSize-20
+                        tsize = 7
+                        
+                    if ln == 2:
+                        fsize = blockSize-45
+                        tsize = 7
+                    
+                    if ln == 3:
+                        fsize = blockSize-70
+                        tsize = 5
+                    
+                    if ln == 4:
+                        fsize = blockSize-80
+                        tsize = 1
+                        
+                    
+                    font = easy_pil.Font.poppins(size = fsize)
                     top = 15 + ln*10 - (8 if ln != 0 else 0)
                     try:fontColor = custom.__getattribute__(f"font_{j}")
                     except:fontColor = custom.font
-                    cnv.text(position = (blockSize/2, top-(10 if ln == 4 else 0)-(1 if ln == 3 else 0)), text = str(j), color = fontColor, font = font, align = "center")
+                    cnv.text(position = (blockSize/2, top+tsize), text = str(j), color = fontColor, font = font, align = "center")
                 img.paste(cnv, position=(pos[0], pos[1]))
                 pos[0] += blockSize
             pos[1] += blockSize
@@ -196,7 +216,7 @@ if __name__ == "__main__":
     os.system("cls")
     
     g = Game()
-    g.encodingImage()
+    g.encodingImage().show()
     
     print(f"point: {g.point}")
     print(g.encodingText())
