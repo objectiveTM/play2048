@@ -1,4 +1,5 @@
 import random, os
+# from enums import *
 from .enums import *
 import easy_pil
 
@@ -23,7 +24,7 @@ class Game:
     def move(self , key:move, _debug = False):
         if key == move.UP:
             pos = {'x': 0, 'y': 0}
-            where = [0 for i in range(5)]
+            where = [0 for i in range(4)]
             before = False
             for i in self.arr:
                 pos['x'] = 0
@@ -49,8 +50,8 @@ class Game:
                 
                     
         elif key == move.DOWN:
-            pos = {'x': 0, 'y': 4}
-            where = [4 for i in range(5)]
+            pos = {'x': 0, 'y': 3}
+            where = [3 for i in range(4)]
             before = False
             for i in self.arr[::-1]:
                 pos['x'] = 0
@@ -79,7 +80,7 @@ class Game:
             
             
             pos = {'x': 0, 'y': 0}
-            where = [0 for i in range(5)]
+            where = [0 for i in range(4)]
             before = False
             for i in self.arr:
                 pos['y'] = 0
@@ -105,8 +106,8 @@ class Game:
                 self.move(key, True)
                     
         elif key == move.RIGHT:
-            pos = {'x': 4, 'y': 0}
-            where = [4 for i in range(5)]
+            pos = {'x': 3, 'y': 0}
+            where = [3 for i in range(4)]
             before = False
             for i in self.arr:
                 pos['y'] = 0
