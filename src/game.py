@@ -10,13 +10,14 @@ class Game:
     ## example
     [@see cmd2048](https://github.com/objectiveTM/play2048/tree/main/examples/cmd2048.py)
     """
-    def __init__(self) -> None:
+    def __init__(self, spown = lambda :(4 if random.randint(0, 10) == 0 else 2)) -> None:
         self.arr = [[0 for i in range(5)] for i in range(5)]
         self.point = 0
+        self.spown = spown
 
         try:
             pos = self._random()
-            self.arr[pos[0]][pos[1]] = (4 if random.randint(0, 10) == 0 else 2)
+            self.arr[pos[0]][pos[1]] = self.spown()
         except:pass
     
     def move(self , key:move, _debug = False):
@@ -137,7 +138,7 @@ class Game:
         if not _debug:
             try:
                 pos = self._random()
-                self.arr[pos[0]][pos[1]] = (4 if random.randint(0, 10) == 0 else 2)
+                self.arr[pos[0]][pos[1]] = self.spown()
             except:pass
         
     def _random(self) -> tuple[int]: 
@@ -157,8 +158,7 @@ class Game:
         
         return re
     
-    def encodingImage(self, custom: Custom = customs.ORIGINAL) -> easy_pil.Editor:
-        custom = custom.value
+    def encodingImage(self, custom: Custom = customs.ORIGINAL.value) -> easy_pil.Editor:
         size = 500
         padding = 10
         blockSize = int((size - padding*6)/5)
