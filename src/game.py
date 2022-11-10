@@ -15,6 +15,10 @@ class Game:
         self.arr = [[0 for i in range(4)] for i in range(4)]
         self.point = 0
         self.spown = spown
+        w = 0
+        self.arr[3 + w][2] = 2
+        self.arr[2 + w][2] = 8
+        self.arr[1 + w][2] = 2
 
         try:
             pos = self._random()
@@ -34,10 +38,12 @@ class Game:
                             save = self.arr[pos['y']][pos['x']]
                             self.arr[pos['y']][pos['x']] = 0
                             w = 0
-                            if self.arr[where[pos['x']]-1][pos['x']] == save and not _debug: 
+                            
+                            if self.arr[where[pos['x']]-1][pos['x']] == save and not _debug and where[pos['x']]-1 != -1: 
                                 save *= 2
                                 self.point += save
                                 w = 1
+                                ...
 
                             self.arr[where[pos['x']]-w][pos['x']] = save
                         where[pos['x']] += 1
@@ -45,8 +51,6 @@ class Game:
                     pos['x'] += 1
                 before = True
                 pos['y'] += 1
-            if not _debug:
-                self.move(key, True)
                 
                     
         elif key == move.DOWN:
@@ -73,8 +77,6 @@ class Game:
                     pos['x'] += 1
                 before = True
                 pos['y'] -= 1
-            if not _debug:
-                self.move(key, True)
             
         elif key == move.LEFT:
             
@@ -91,7 +93,7 @@ class Game:
                             self.arr[pos['y']][pos['x']] = 0
                             w = 0
                             try:
-                                if self.arr[pos['y']][where[pos['y']]-1] == save and not _debug: 
+                                if self.arr[pos['y']][where[pos['y']]-1] == save and not _debug and where[pos['y']]-1 != -1: 
                                     save *= 2
                                     self.point += save
                                     w = 1
@@ -101,9 +103,6 @@ class Game:
                     pos['y'] += 1
                 before = True
                 pos['x'] += 1
-                
-            if not _debug:
-                self.move(key, True)
                     
         elif key == move.RIGHT:
             pos = {'x': 3, 'y': 0}
@@ -131,12 +130,9 @@ class Game:
                 pos['x'] -= 1
                 
                 
-            if not _debug:
-                self.move(key, True)
-                
-                
                     
         if not _debug:
+            self.move(key, True)
             try:
                 pos = self._random()
                 self.arr[pos[0]][pos[1]] = self.spown()
