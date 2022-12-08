@@ -16,9 +16,6 @@ class Game:
         self.point = 0
         self.spown = spown
         w = 0
-        self.arr[3 + w][2] = 2
-        self.arr[2 + w][2] = 8
-        self.arr[1 + w][2] = 2
 
         try:
             pos = self._random()
